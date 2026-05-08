@@ -1,47 +1,619 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>DevOps Project</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Bhargav | DevOps Engineer & Cloud Architect Portfolio</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body{
-            background-color:#0f172a;
-            color:white;
-            text-align:center;
-            padding-top:120px;
-            font-family:Arial;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1{
-            font-size:50px;
-            color:#38bdf8;
+        body {
+            background: linear-gradient(145deg, #0a0f1c 0%, #0f172a 100%);
+            color: #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            scroll-behavior: smooth;
         }
 
-        p{
-            font-size:24px;
+        /* custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #38bdf8;
+            border-radius: 12px;
         }
 
-        .box{
-            width:60%;
-            margin:auto;
-            padding:30px;
-            border-radius:15px;
-            background:#1e293b;
-            box-shadow:0px 0px 15px gray;
+        /* navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(18px);
+            background: rgba(15, 23, 42, 0.75);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+            transition: all 0.3s;
+        }
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover {
+            color: #38bdf8;
+            transform: translateY(-2px);
+        }
+        .menu-icon {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #38bdf8;
+        }
+
+        /* hero section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(56,189,248,0.2) 0%, rgba(15,23,42,0) 70%);
+            top: 30%;
+            left: 25%;
+            z-index: 0;
+        }
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-badge {
+            background: rgba(56, 189, 248, 0.15);
+            backdrop-filter: blur(4px);
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            color: #7dd3fc;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #ffffff, #94a3b8, #38bdf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.2rem;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            color: #cbd5e6;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        .pipeline-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 1rem 1.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            margin-bottom: 2rem;
+        }
+        .pipe-step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #0f172a;
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #facc15;
+        }
+        .pipe-step i {
+            color: #38bdf8;
+            font-size: 1.2rem;
+        }
+        .btn-group {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: linear-gradient(95deg, #0f2b3d, #1e3a5f);
+            border: 1px solid #38bdf8;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .btn-primary:hover {
+            background: #1e3a8a;
+            border-color: #7dd3fc;
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.2);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #38bdf8;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            color: #38bdf8;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.3s;
+        }
+        .btn-outline:hover {
+            background: rgba(56, 189, 248, 0.1);
+            transform: scale(1.02);
+        }
+
+        /* section styling */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #e2e8f0, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .section-sub {
+            text-align: center;
+            color: #94a3b8;
+            max-width: 680px;
+            margin: 0 auto 3rem auto;
+            font-size: 1.1rem;
+        }
+
+        /* skills grid */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        .skill-badge {
+            background: #1e293b;
+            border-radius: 40px;
+            padding: 0.7rem 1.8rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.2s;
+            border: 1px solid #334155;
+            font-size: 1rem;
+        }
+        .skill-badge i {
+            font-size: 1.4rem;
+            color: #38bdf8;
+        }
+        .skill-badge:hover {
+            border-color: #38bdf8;
+            transform: translateY(-3px);
+            background: #0f172a;
+        }
+
+        /* project cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .project-card {
+            background: #111827;
+            border-radius: 1.5rem;
+            padding: 1.8rem;
+            border: 1px solid #2d3a5e;
+            transition: 0.25s ease;
+            backdrop-filter: blur(4px);
+        }
+        .project-card:hover {
+            transform: translateY(-7px);
+            border-color: #38bdf8;
+            box-shadow: 0 20px 30px -15px rgba(0,0,0,0.5);
+        }
+        .project-icon {
+            font-size: 2.5rem;
+            color: #38bdf8;
+            margin-bottom: 1rem;
+        }
+        .project-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 0.7rem;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1rem 0;
+        }
+        .tech-stack span {
+            background: #1e293b;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #b9e2ff;
+        }
+        .status-badge {
+            display: inline-block;
+            background: rgba(34,197,94,0.2);
+            color: #4ade80;
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 0.8rem;
+        }
+
+        /* pipeline showcase */
+        .pipeline-showcase {
+            background: linear-gradient(135deg, #0f172a, #0a0f1c);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            border: 1px solid #2d3a5e;
+        }
+        .pipeline-flow {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+        .flow-node {
+            background: #1e293b;
+            padding: 0.8rem 1.2rem;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .arrow-icon {
+            color: #38bdf8;
+            font-size: 1.3rem;
+        }
+
+        /* contact section */
+        .contact-wrap {
+            background: #0f172a;
+            border-radius: 2rem;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid #2d3a5e;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .social-links a {
+            color: #cbd5e1;
+            font-size: 1.8rem;
+            transition: 0.2s;
+        }
+        .social-links a:hover {
+            color: #38bdf8;
+            transform: scale(1.1);
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #1e293b;
+            color: #6c7a91;
+            font-size: 0.9rem;
+        }
+
+        /* responsive */
+        @media (max-width: 780px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: #0f172ae6;
+                backdrop-filter: blur(20px);
+                padding: 1rem;
+                border-radius: 1rem;
+                margin-top: 1rem;
+            }
+            .nav-links.show {
+                display: flex;
+            }
+            .menu-icon {
+                display: block;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .pipeline-card {
+                flex-direction: column;
+                width: 90%;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
         }
     </style>
-
 </head>
-
 <body>
 
-<div class="box">
-    <h1>Jenkins + Maven + Tomcat</h1>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo"><i class="fas fa-code-branch"></i> Bhargav.dev</div>
+        <div class="menu-icon" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#pipeline">CI/CD</a></li>
+            <li><a href="#contact">Connect</a></li>
+        </ul>
+    </div>
+</nav>
 
-    <p>CI/CD Pipeline Successfully Deployed</p>
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-bg-glow"></div>
+    <div class="hero-content">
+        <div class="hero-badge">
+            <i class="fas fa-robot"></i> DevOps Engineer | Cloud Native
+        </div>
+        <h1>Automate. Scale. Innovate.</h1>
+        <p>Building resilient CI/CD pipelines, cloud infrastructure, and full-stack delivery systems with modern tooling. 5+ years of streamlining deployments.</p>
+        
+        <div class="pipeline-card">
+            <div class="pipe-step"><i class="fab fa-jenkins"></i> Jenkins</div>
+            <i class="fas fa-arrow-right arrow-icon"></i>
+            <div class="pipe-step"><i class="fas fa-code-branch"></i> Maven</div>
+            <i class="fas fa-arrow-right arrow-icon"></i>
+            <div class="pipe-step"><i class="fas fa-server"></i> Tomcat</div>
+            <i class="fas fa-arrow-right arrow-icon"></i>
+            <div class="pipe-step"><i class="fas fa-cloud-upload-alt"></i> Deployed</div>
+        </div>
 
-    <p>Project By Bhargav</p>
-</div>
+        <div class="btn-group">
+            <a href="#projects" class="btn-primary"><i class="fas fa-arrow-down"></i> View Work</a>
+            <a href="#contact" class="btn-outline"><i class="fas fa-paper-plane"></i> Contact Me</a>
+        </div>
+    </div>
+</section>
 
+<!-- Skills Section -->
+<section id="skills">
+    <h2 class="section-title">Toolchain & Expertise</h2>
+    <p class="section-sub">End-to-end automation & cloud orchestration — the stack that powers modern infrastructure.</p>
+    <div class="skills-grid">
+        <div class="skill-badge"><i class="fab fa-jenkins"></i> Jenkins</div>
+        <div class="skill-badge"><i class="fas fa-code"></i> Maven</div>
+        <div class="skill-badge"><i class="fab fa-docker"></i> Docker</div>
+        <div class="skill-badge"><i class="fab fa-kubernetes"></i> Kubernetes</div>
+        <div class="skill-badge"><i class="fab fa-aws"></i> AWS</div>
+        <div class="skill-badge"><i class="fas fa-server"></i> Tomcat</div>
+        <div class="skill-badge"><i class="fab fa-git-alt"></i> Git/GitHub</div>
+        <div class="skill-badge"><i class="fas fa-infinity"></i> Ansible</div>
+        <div class="skill-badge"><i class="fas fa-chart-line"></i> Prometheus</div>
+        <div class="skill-badge"><i class="fab fa-linux"></i> Linux</div>
+    </div>
+</section>
+
+<!-- Projects (portfolio) -->
+<section id="projects">
+    <h2 class="section-title">Featured Engineering Projects</h2>
+    <p class="section-sub">Real-world DevOps implementations — from zero to production grade.</p>
+    <div class="projects-grid">
+        <div class="project-card">
+            <div class="project-icon"><i class="fab fa-jenkins"></i></div>
+            <h3>Jenkins + Maven + Tomcat Pipeline</h3>
+            <p>Fully automated CI/CD pipeline that compiles Java applications with Maven, runs unit tests, and deploys to Apache Tomcat cluster. Integrated with webhooks for GitHub.</p>
+            <div class="tech-stack">
+                <span>Jenkins</span><span>Maven</span><span>Tomcat</span><span>Groovy</span>
+            </div>
+            <div class="status-badge"><i class="fas fa-check-circle"></i> Live Pipeline</div>
+        </div>
+        <div class="project-card">
+            <div class="project-icon"><i class="fas fa-dharmachakra"></i></div>
+            <h3>K8s Microservice Orchestration</h3>
+            <p>Deployed scalable microservices on EKS with Ingress, Helm charts, and auto-scaling HPA. Reduced downtime by 40% via rolling updates.</p>
+            <div class="tech-stack">
+                <span>K8s</span><span>Docker</span><span>Helm</span><span>AWS EKS</span>
+            </div>
+        </div>
+        <div class="project-card">
+            <div class="project-icon"><i class="fas fa-chart-simple"></i></div>
+            <h3>Infrastructure Monitoring Stack</h3>
+            <p>Setup Prometheus, Grafana, and Loki for real-time observability. Custom dashboards & alerting rules for server health and pipeline metrics.</p>
+            <div class="tech-stack">
+                <span>Prometheus</span><span>Grafana</span><span>AlertManager</span>
+            </div>
+        </div>
+        <div class="project-card">
+            <div class="project-icon"><i class="fas fa-code-branch"></i></div>
+            <h3>GitOps with ArgoCD</h3>
+            <p>Declarative continuous delivery for Kubernetes. Automated sync from Git repo to target clusters, drift detection, and rollback strategies.</p>
+            <div class="tech-stack">
+                <span>ArgoCD</span><span>GitHub Actions</span><span>K8s</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pipeline showcase section (CI/CD deep dive) -->
+<section id="pipeline">
+    <h2 class="section-title">⚙️ Production CI/CD Blueprint</h2>
+    <p class="section-sub">How code moves from commit to cluster — automated, tested, secured.</p>
+    <div class="pipeline-showcase">
+        <div class="pipeline-flow">
+            <div class="flow-node"><i class="fab fa-github"></i> Code Push</div>
+            <i class="fas fa-arrow-right arrow-icon"></i>
+            <div class="flow-node"><i class="fab fa-jenkins"></i> Jenkins Webhook</div>
+            <i class="fas fa-arrow-right arrow-icon"></i>
+            <div class="flow-node"><i class="fas fa-code"></i> Maven Build & Test</div>
+            <i class="fas fa-arrow-right arrow-icon"></i>
+            <div class="flow-node"><i class="fas fa-box"></i> Docker Image</div>
+            <i class="fas fa-arrow-right arrow-icon"></i>
+            <div class="flow-node"><i class="fas fa-server"></i> Tomcat Deployment</div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+            <span style="background: #0f172a; padding: 0.3rem 1rem; border-radius: 30px; font-size: 0.8rem;"><i class="fas fa-chart-line"></i> 99.9% deployment success | Automated rollback on failure</span>
+        </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 1.8rem; justify-content: space-between; margin-top: 2rem;">
+        <div style="flex:1; min-width: 200px; background:#0f172a; border-radius:1.5rem; padding:1.5rem; text-align:center;">
+            <i class="fas fa-tachometer-alt" style="font-size: 2rem; color:#38bdf8;"></i>
+            <h3 style="margin: 0.7rem 0;">Fast Builds</h3>
+            <p style="font-size: 0.9rem;">Parallel Maven stages reduce build time by 35%</p>
+        </div>
+        <div style="flex:1; min-width: 200px; background:#0f172a; border-radius:1.5rem; padding:1.5rem; text-align:center;">
+            <i class="fas fa-shield-alt" style="font-size: 2rem; color:#38bdf8;"></i>
+            <h3 style="margin: 0.7rem 0;">Security Scanning</h3>
+            <p style="font-size: 0.9rem;">SAST & dependency checks integrated in pipeline</p>
+        </div>
+        <div style="flex:1; min-width: 200px; background:#0f172a; border-radius:1.5rem; padding:1.5rem; text-align:center;">
+            <i class="fas fa-sync-alt" style="font-size: 2rem; color:#38bdf8;"></i>
+            <h3 style="margin: 0.7rem 0;">Zero-downtime</h3>
+            <p style="font-size: 0.9rem;">Blue-green deployments on Tomcat clusters</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact / Portfolio Message -->
+<section id="contact">
+    <div class="contact-wrap">
+        <i class="fas fa-paper-plane" style="font-size: 3rem; color: #38bdf8; margin-bottom: 1rem; display: inline-block;"></i>
+        <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">Let's Connect & Collaborate</h2>
+        <p style="max-width: 500px; margin: 0 auto 1rem;">DevOps engineer passionate about automation, cloud migrations, and building resilient systems. Open for freelance & full-time opportunities.</p>
+        <div class="social-links">
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+        <a href="#" style="background: #1e293b; padding: 0.8rem 2rem; border-radius: 40px; text-decoration: none; color: white; display: inline-flex; gap: 0.6rem; align-items: center;"><i class="fas fa-download"></i> Download Resume</a>
+        <p style="margin-top: 1.5rem; font-size: 0.85rem;"><i class="fas fa-check-circle" style="color:#4ade80;"></i> CI/CD Pipeline: Jenkins + Maven + Tomcat — fully operational</p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Bhargav — DevOps Engineer | Crafted with <i class="fas fa-heart" style="color:#38bdf8;"></i> for automation & cloud excellence — CI/CD deployed with Tomcat</p>
+    <p style="margin-top: 0.6rem;">⚙️ “Build, test, deploy, repeat.”</p>
+</footer>
+
+<script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('show');
+    });
+
+    // Close menu when clicking a link (smooth scroll)
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if(targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if(navLinks.classList.contains('show')) navLinks.classList.remove('show');
+            }
+        });
+    });
+
+    // Optional: active link highlight based on scroll (simple)
+    const sections = document.querySelectorAll('section');
+    const navItems = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            if(pageYOffset >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navItems.forEach(link => {
+            link.style.color = '#cbd5e1';
+            if(link.getAttribute('href').substring(1) === current) {
+                link.style.color = '#38bdf8';
+            }
+        });
+    });
+</script>
 </body>
 </html>
